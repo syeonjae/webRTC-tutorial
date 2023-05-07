@@ -9,15 +9,15 @@ export const Room = () => {
 
   useEffect(() => {
     if (me) ws.emit("join-room", { roomId: id, peerId: me._id });
-  }, [id]);
+  }, [id, ws, me]);
   return (
     <>
       Welcome to {id} room{" "}
       <div className="grid grid-cols-4 gap-4">
         <VideoPlayer stream={stream} />
 
-        {Object.values(peers as PeerState).map((peer) => (
-          <VideoPlayer stream={peer.stream} />
+        {Object.values(peers as PeerState).map((peer, idx) => (
+          <VideoPlayer key={idx} stream={peer.stream} />
         ))}
       </div>
     </>

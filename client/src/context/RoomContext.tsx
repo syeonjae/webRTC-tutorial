@@ -22,12 +22,13 @@ export const RoomProvider: React.FunctionComponent<Props> = ({ children }) => {
   const [peers, dispatch] = useReducer(peersReducer, {});
 
   const enterRoom = ({ roomId }: { roomId: string }) => {
-    console.log({ roomId });
     navigate(`/room/${roomId}`);
   };
 
   const getUsers = ({ participants }: { participants: string[] }) => {
+    console.log("==============1");
     console.log({ participants });
+    console.log("==============");
   };
 
   const removePeer = (peerId: string) => {
@@ -35,7 +36,6 @@ export const RoomProvider: React.FunctionComponent<Props> = ({ children }) => {
   };
   useEffect(() => {
     const meId = uuidV4();
-    console.log(meId);
 
     const peer = new Peer(meId);
     setMe(peer);
@@ -60,6 +60,7 @@ export const RoomProvider: React.FunctionComponent<Props> = ({ children }) => {
 
     ws.on("user-joined", ({ peerId }) => {
       const call = me.call(peerId, stream);
+      console.log("User Joined!! : ", peerId)
       call.on("stream", (peerStream) => {
         dispatch(addPeerAction(peerId, peerStream));
       });
@@ -71,8 +72,6 @@ export const RoomProvider: React.FunctionComponent<Props> = ({ children }) => {
       });
     });
   }, [me, stream]);
-
-  console.log({ peers });
   return (
     <RoomContext.Provider value={{ ws, me, stream, peers }}>
       {children}
