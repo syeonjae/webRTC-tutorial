@@ -4,8 +4,6 @@ import { RoomContext } from "../context/RoomContext";
 export const Join: React.FC = () => {
   const { ws } = useContext(RoomContext);
   const createRoom = () => {
-    alert("확인");
-
     ws.emit("create-room");
   };
   return (

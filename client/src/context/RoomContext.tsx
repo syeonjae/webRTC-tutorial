@@ -35,6 +35,7 @@ export const RoomProvider: React.FunctionComponent<Props> = ({ children }) => {
   };
   useEffect(() => {
     const meId = uuidV4();
+    console.log(meId);
 
     const peer = new Peer(meId);
     setMe(peer);
