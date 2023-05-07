@@ -11,7 +11,6 @@ const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
 root.render(
-  <React.StrictMode>
     <BrowserRouter>
       <RoomProvider>
         <Routes>
@@ -20,5 +19,4 @@ root.render(
         </Routes>
       </RoomProvider>
     </BrowserRouter>
-  </React.StrictMode>
 );
